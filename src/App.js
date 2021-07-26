@@ -8,6 +8,7 @@ import ForgotPassword from './component/auth/ForgotPassword';
 import AddSurvey from './component/survey/AddSurvey';
 import EditSurvey from './component/survey/EditSurvey';
 import DeleteSrvey from './component/survey/DeleteSrvey';
+import YourSurvey from './component/survey/YourSurvey';
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
         </Route>
         <Route path="/edit">
           <EditSurvey />
+        </Route>
+        <Route path="/your">
+          <YourSurvey />
         </Route>
         <Route path="/delete">
           <DeleteSrvey />

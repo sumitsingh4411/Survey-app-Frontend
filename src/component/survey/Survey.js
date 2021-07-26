@@ -1,95 +1,52 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Grid, Paper, Typography, Button } from '@material-ui/core'
+import axios from 'axios';
 
 
 function Survey() {
-    const paperStyle = { padding: 10, height: '30vh', width: "40%", margin: "20px auto" }
+    const [data, setData] = useState(null);
+    const [mycolr, setmycolr] = useState(null);
+    useEffect(() => {
+        axios.get('https://surveybackend12.herokuapp.com/api/survey', {
+        }).then(res => {
+            setData(res.data);
+            console.log(res.data)
+        }).catch(err => {
+            console.log(err)
+        });
+    }, [])
+    const paperStyle = { padding: 10, height: '30%', width: "60%", margin: "20px auto" }
+    const whichbuttom = (e) => {
+        setmycolr(e);
+    }
     return (
         <Grid>
-            <Paper elevation={10} style={paperStyle}>
-                <Typography style={{ padding: 20 }}>
-                    <Typography style={{ fontWeight: 'bolder', color: '#7AD096' }}>
-                        1. How wourld rate your expericne with our product
-                    </Typography>
-                    <Typography style={{ marginLeft: 30, marginTop: 10 }}>
-                        <Typography>
-                            <Button variant="outlined" color="primary" style={{ marginTop: 10 }} >1.  satisfied</Button>
-                        </Typography>
-                        <Typography>
-                            <Button variant="outlined" color="primary" style={{ marginTop: 10 }}>2. Not satisfied</Button>
-                        </Typography>
-                        <Typography>
-                            <Button variant="outlined" color="primary" style={{ marginTop: 10 }}>3. neither agree satisfied</Button>
-                        </Typography>
-                        <Typography>
-                            <Button variant="outlined" color="primary" style={{ marginTop: 10 }}>4. yes satisfied</Button>
-                        </Typography>
-                    </Typography>
-                </Typography>
-            </Paper>
-            <Paper elevation={10} style={paperStyle}>
-                <Typography style={{ padding: 20 }}>
-                    <Typography style={{ fontWeight: 'bolder', color: '#7AD096' }}>
-                        1. How wourld rate your expericne with our product
-                    </Typography>
-                    <Typography style={{ marginLeft: 30, marginTop: 10 }}>
-                        <Typography>
-                            <Button variant="outlined" color="primary" style={{ marginTop: 10 }} >1.  satisfied</Button>
-                        </Typography>
-                        <Typography>
-                            <Button variant="outlined" color="primary" style={{ marginTop: 10 }}>2. Not satisfied</Button>
-                        </Typography>
-                        <Typography>
-                            <Button variant="outlined" color="primary" style={{ marginTop: 10 }}>3. neither agree satisfied</Button>
-                        </Typography>
-                        <Typography>
-                            <Button variant="outlined" color="primary" style={{ marginTop: 10 }}>4. yes satisfied</Button>
-                        </Typography>
-                    </Typography>
-                </Typography>
-            </Paper>
-            <Paper elevation={10} style={paperStyle}>
-                <Typography style={{ padding: 20 }}>
-                    <Typography style={{ fontWeight: 'bolder', color: '#7AD096' }}>
-                        1. How wourld rate your expericne with our product
-                    </Typography>
-                    <Typography style={{ marginLeft: 30, marginTop: 10 }}>
-                        <Typography>
-                            <Button variant="outlined" color="primary" style={{ marginTop: 10 }} >1.  satisfied</Button>
-                        </Typography>
-                        <Typography>
-                            <Button variant="outlined" color="primary" style={{ marginTop: 10 }}>2. Not satisfied</Button>
-                        </Typography>
-                        <Typography>
-                            <Button variant="outlined" color="primary" style={{ marginTop: 10 }}>3. neither agree satisfied</Button>
-                        </Typography>
-                        <Typography>
-                            <Button variant="outlined" color="primary" style={{ marginTop: 10 }}>4. yes satisfied</Button>
-                        </Typography>
-                    </Typography>
-                </Typography>
-            </Paper>
-            <Paper elevation={10} style={paperStyle}>
-                <Typography style={{ padding: 20 }}>
-                    <Typography style={{ fontWeight: 'bolder', color: '#7AD096' }}>
-                        1. How wourld rate your expericne with our product
-                    </Typography>
-                    <Typography style={{ marginLeft: 30, marginTop: 10 }}>
-                        <Typography>
-                            <Button variant="outlined" color="primary" style={{ marginTop: 10 }} >1.  satisfied</Button>
-                        </Typography>
-                        <Typography>
-                            <Button variant="outlined" color="primary" style={{ marginTop: 10 }}>2. Not satisfied</Button>
-                        </Typography>
-                        <Typography>
-                            <Button variant="outlined" color="primary" style={{ marginTop: 10 }}>3. neither agree satisfied</Button>
-                        </Typography>
-                        <Typography>
-                            <Button variant="outlined" color="primary" style={{ marginTop: 10 }}>4. yes satisfied</Button>
-                        </Typography>
-                    </Typography>
-                </Typography>
-            </Paper>
+            {
+                data && data.map((a) => (
+                    <>
+                        <Paper key={a} elevation={10} style={paperStyle}>
+                            <Typography style={{ padding: 20 }}>
+                                <Typography style={{ fontWeight: 'bolder', color: '#7AD096' }}>
+                                    {a.question} ?
+                                </Typography>
+                                <Typography style={{ marginLeft: 30, marginTop: 10 }}>
+                                    {
+                                        a.option.split(' ').map((e) => (
+                                            <>
+                                                <Typography>
+                                                    <Button id={e} onClick={() => whichbuttom(e)} variant="outlined" color={mycolr === e ? "secondary" : "primary"} style={{ marginTop: 10 }} >{e}</Button>
+                                                </Typography>
+                                            </>
+                                        ))
+                                    }
+                                </Typography>
+                            </Typography>
+                        </Paper>
+                    </>
+                ))
+
+
+            }
 
         </Grid>
     )
