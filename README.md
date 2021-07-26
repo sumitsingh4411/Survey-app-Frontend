@@ -1,3 +1,21 @@
+## Survey-app-FronEnd
+
+### live project url : https://surveyfrontend12.herokuapp.com/
+### Gitgub Frontend url  : https://github.com/sumitsingh4411/Survey-app-Frontend
+
+
+
+## how to start locally
+
+  1. Download this repository
+  2. open in text editor
+  3. run comman "npm install"
+  4. run command "npm start" for production
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
