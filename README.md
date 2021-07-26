@@ -1,7 +1,7 @@
 ## Survey-app-FronEnd
 
 ### live project url : https://surveyfrontend12.herokuapp.com/
-### Gitgub Frontend url  : https://github.com/sumitsingh4411/Survey-app-Frontend
+### Gitgub Backend url  : https://github.com/sumitsingh4411/Survey-app-Backend
 
 
 
